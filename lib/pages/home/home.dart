@@ -18,29 +18,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool isLoggedIn = false;
+  bool isLoggedIn;
   @override
   void initState() {
     handleStartupLogic();
     super.initState();
   }
 
-  handleStartupLogic() {
-    //TODO: handle login routing here
-    Future.delayed(Duration(seconds: 3)).then((value) {
-      LoginRouter.navigateFromSplash(context);
-    });
-  }
+  handleStartupLogic() {}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Splash());
-  }
-}
-
-class LandingPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: IndexedStack(
+      index: 0,
+      children: [
+        Splash(),
+        LandingPage(),
+      ],
+    ));
   }
 }

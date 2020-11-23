@@ -43,7 +43,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
 
     _rippleAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.height,
+      end: widget.height * 3,
     ).animate(CurvedAnimation(
       parent: _rippleAnimationController,
       curve: Curves.easeIn,
