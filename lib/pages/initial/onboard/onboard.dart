@@ -11,12 +11,13 @@ class OnboardRouter extends RouterConfig {
   @override
   MaterialPageRoute route(RouteSettings settings) =>
       MaterialPageRoute(settings: settings, builder: (_) => Onboard());
+
+  static Future<T> navigate<T>(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, '/welcome');
 }
 
 class Onboard extends StatefulWidget {
-  final double height;
-
-  const Onboard({Key key, this.height}) : super(key: key);
+  const Onboard({Key key}) : super(key: key);
   @override
   _OnboardState createState() => _OnboardState();
 }
@@ -43,7 +44,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
 
     _rippleAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.height * 3,
+      end: 800.0 * 3,
     ).animate(CurvedAnimation(
       parent: _rippleAnimationController,
       curve: Curves.easeIn,
@@ -174,7 +175,6 @@ class _PageIndicatorButtonState extends State<PageIndicatorButton>
               pages: widget.index,
               pageController: widget.pageController,
               onPressed: () {
-                print(widget.index);
                 if (widget.pageController.page.toInt() == widget.index - 1)
                   widget.onFinished();
                 widget.pageController.nextPage(

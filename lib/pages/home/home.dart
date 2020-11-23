@@ -19,6 +19,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool isLoggedIn;
+  int index;
   @override
   void initState() {
     handleStartupLogic();
@@ -31,9 +32,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: IndexedStack(
-      index: 0,
+      index: index,
       children: [
-        Splash(),
+        Splash(
+          loaded: (bool loaded) {
+            if (loaded)
+              setState(() {
+                index = 1;
+              });
+          },
+        ),
         LandingPage(),
       ],
     ));

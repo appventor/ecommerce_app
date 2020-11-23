@@ -1,21 +1,22 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
 class DataStorage {
   DataStorage() {
     initialize();
   }
-  SharedPreferences prefs;
+  final store = GetStorage();
 
   void initialize() async {
-    prefs = await SharedPreferences.getInstance();
+    print("data storage init");
+    GetStorage.init();
   }
 
-  String getUserData() {
-    String profileData = prefs.getString('user');
-    return profileData;
+  Future<String> getUserData() async {
+    String profileData = store.read('user');
+    return profileData ?? 'nil';
   }
 
   void storeUserData(String data) {
-    prefs.setString('user', data ?? null);
+    store.write('user', data ?? 'nil');
   }
 }
