@@ -10,6 +10,9 @@ class HomeRouter extends RouterConfig {
   @override
   MaterialPageRoute route(RouteSettings settings) =>
       MaterialPageRoute(settings: settings, builder: (_) => Home());
+
+  static Future<T> navigate<T>(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, '/');
 }
 
 class Home extends StatefulWidget {
@@ -20,30 +23,24 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isLoggedIn;
   int index;
-  @override
-  void initState() {
-    handleStartupLogic();
-    super.initState();
-  }
-
-  handleStartupLogic() {}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: IndexedStack(
-      index: index,
-      children: [
-        Splash(
-          loaded: (bool loaded) {
-            if (loaded)
-              setState(() {
-                index = 1;
-              });
-          },
-        ),
-        LandingPage(),
-      ],
-    ));
+    return Material(
+      child: IndexedStack(
+        index: index,
+        children: [
+          Splash(
+            loaded: (bool loaded) {
+              if (loaded)
+                setState(() {
+                  index = 1;
+                });
+            },
+          ),
+          LandingPage(),
+        ],
+      ),
+    );
   }
 }

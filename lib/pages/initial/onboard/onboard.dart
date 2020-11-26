@@ -1,4 +1,5 @@
 import 'dart:math';
+import '../../../services/locator.dart';
 import 'package:flutter/material.dart';
 import '../../pages.dart';
 import 'widgets/page_indicator_button.dart';
@@ -26,6 +27,8 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
   PageController _pageController;
   AnimationController _rippleAnimationController;
   Animation<double> _rippleAnimation;
+
+  DataStorage _dataStorage = locator<DataStorage>();
 
   List<Widget> _pages = [
     Container(color: Colors.blue),
@@ -59,47 +62,51 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  navigateToLogin() {
+    _rippleAnimationController.forward();
+    _dataStorage.storeUserData('anon');
+    LoginRouter.navigate(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        PageView(
-          controller: _pageController,
-          children: _pages,
-        ),
-        Positioned(
-          top: 10,
-          right: 5,
-          child: FlatButton.icon(
-            icon: Icon(
-              Icons.fast_forward,
-              color: Colors.white,
+    return Material(
+      child: Stack(
+        children: [
+          PageView(
+            controller: _pageController,
+            children: _pages,
+          ),
+          Positioned(
+            top: 10,
+            right: 5,
+            child: FlatButton.icon(
+              icon: Icon(
+                Icons.fast_forward,
+                color: Colors.white,
+              ),
+              label: Text(
+                "SKIP",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => navigateToLogin(),
             ),
-            label: Text(
-              "SKIP",
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              _rippleAnimationController.forward();
+          ),
+          PageIndicatorButton(
+            pageController: _pageController,
+            index: _pages.length,
+            onFinished: () => navigateToLogin(),
+          ),
+          AnimatedBuilder(
+            animation: _rippleAnimation,
+            builder: (_, Widget child) {
+              return Ripple(
+                radius: _rippleAnimation.value,
+              );
             },
           ),
-        ),
-        PageIndicatorButton(
-          pageController: _pageController,
-          index: _pages.length,
-          onFinished: () {
-            _rippleAnimationController.forward();
-          },
-        ),
-        AnimatedBuilder(
-          animation: _rippleAnimation,
-          builder: (_, Widget child) {
-            return Ripple(
-              radius: _rippleAnimation.value,
-            );
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

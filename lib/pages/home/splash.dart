@@ -33,8 +33,8 @@ class SplashState extends State<Splash> {
     super.initState();
   }
 
-  void handleStartupLogic() async {
-    String user = await _dataStorage.getUserData();
+  void handleStartupLogic() {
+    String user = _dataStorage.getUserData();
     print("user is $user");
     Timer((const Duration(seconds: 1)), () {
       setState(() {

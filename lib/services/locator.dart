@@ -6,6 +6,5 @@ export 'data_storage.dart';
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
-  // locator.registerSingleton<DataStorage>(DataStorage());
-  locator.registerSingletonAsync<DataStorage>(() async => DataStorage());
+  locator.registerSingleton<DataStorage>(DataStorage());
 }
