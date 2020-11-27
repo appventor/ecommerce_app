@@ -44,7 +44,7 @@ class SplashState extends State<Splash> {
         case 'nil':
           OnboardRouter.navigate(context);
           break;
-        case 'anon':
+        case 'login':
           LoginRouter.navigate(context);
           break;
         default:

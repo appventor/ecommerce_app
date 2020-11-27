@@ -10,7 +10,8 @@ export 'home/home.dart';
 export 'home/splash.dart';
 export 'home/landing.dart';
 export 'home/appSearchBar.dart';
-
+export 'home/app_drawer.dart';
+export 'profile/profile_page.dart';
 export 'products/products_home.dart';
 
 export 'category/category_tiles.dart';

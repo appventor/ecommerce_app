@@ -64,8 +64,8 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
 
   navigateToLogin() {
     _rippleAnimationController.forward();
-    _dataStorage.storeUserData('anon');
-    LoginRouter.navigate(context);
+    _dataStorage.storeUserData('login');
+    Navigator.of(context).pushReplacementNamed("/login");
   }
 
   @override

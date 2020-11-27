@@ -24,6 +24,7 @@ abstract class RouterConfig {
     HomeRouter(),
     OnboardRouter(),
     LoginRouter(),
-    SearchRouter()
+    SearchRouter(),
+    ProfileRouter()
   ];
 }
