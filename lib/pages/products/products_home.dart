@@ -1,7 +1,7 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:build_context/build_context.dart';
+
+import '../pages.dart';
 
 class Products extends StatelessWidget {
   const Products({

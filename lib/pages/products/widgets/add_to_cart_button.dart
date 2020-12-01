@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../pages.dart';
 
 class AddToCartButton extends StatefulWidget {
   @override
@@ -33,9 +34,9 @@ class _AddToCartButtonState extends State<AddToCartButton> {
                 ),
           Expanded(
             child: Container(
-              color: Colors.blue,
               child: Text(
                 value < 1 ? "Add" : "$value",
+                style: context.textTheme.bodyText1,
                 textAlign: TextAlign.center,
               ),
             ),
