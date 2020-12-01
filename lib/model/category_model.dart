@@ -15,29 +15,29 @@ class Category {
     this.title,
     this.description,
     this.subCategory,
-    this.products,
     this.offers,
+    this.products,
   });
 
   String title;
   String description;
   List<Category> subCategory;
-  String products;
   List<Category> offers;
+  String products;
 
   Category copyWith({
     String title,
     String description,
     List<Category> subCategory,
-    String products,
     List<Category> offers,
+    String products,
   }) =>
       Category(
         title: title ?? this.title,
         description: description ?? this.description,
         subCategory: subCategory ?? this.subCategory,
-        products: products ?? this.products,
         offers: offers ?? this.offers,
+        products: products ?? this.products,
       );
 
   factory Category.fromMap(Map<String, dynamic> json) => Category(
@@ -47,11 +47,11 @@ class Category {
             ? null
             : List<Category>.from(
                 json["SubCategory"].map((x) => Category.fromMap(x))),
-        products: json["products"] == null ? null : json["products"],
         offers: json["offers"] == null
             ? null
             : List<Category>.from(
                 json["offers"].map((x) => Category.fromMap(x))),
+        products: json["products"] == null ? null : json["products"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -60,9 +60,9 @@ class Category {
         "SubCategory": subCategory == null
             ? null
             : List<dynamic>.from(subCategory.map((x) => x.toMap())),
-        "products": products == null ? null : products,
         "offers": offers == null
             ? null
             : List<dynamic>.from(offers.map((x) => x.toMap())),
+        "products": products == null ? null : products,
       };
 }
