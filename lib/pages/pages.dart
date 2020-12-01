@@ -17,6 +17,7 @@ export 'products/product_detail.dart';
 export 'products/product_variant.dart';
 export 'products/widgets/product_image_slider.dart';
 export 'products/widgets/add_to_cart_button.dart';
+export 'products/widgets/product_description.dart';
 
 export 'category/category_tiles.dart';
 
