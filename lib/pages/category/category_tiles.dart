@@ -18,7 +18,7 @@ class CategoryTiles extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
               child: CircleAvatar(
                 radius: 40,
                 backgroundColor:

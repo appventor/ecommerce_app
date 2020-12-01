@@ -25,6 +25,7 @@ abstract class RouterConfig {
     OnboardRouter(),
     LoginRouter(),
     SearchRouter(),
-    ProfileRouter()
+    ProfileRouter(),
+    ProductRouter(),
   ];
 }

@@ -14,6 +14,7 @@ class CustomSearchBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
         child: TextField(
+          autofocus: enabled,
           enabled: enabled,
           decoration: InputDecoration(
               fillColor: Colors.white,

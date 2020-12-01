@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:build_context/build_context.dart';
@@ -6,6 +7,44 @@ class Products extends StatelessWidget {
   const Products({
     Key key,
   }) : super(key: key);
+
+  // Build animated item (helper for all examples)
+  Widget buildAnimatedItem(
+    BuildContext context,
+    int index,
+    Animation<double> animation,
+  ) =>
+      // For example wrap with fade transition
+      FadeTransition(
+        opacity: Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(animation),
+        // And slide transition
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(0, 0.1),
+            end: Offset.zero,
+          ).animate(animation),
+          // Paste you Widget
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed("/product/$index");
+            },
+            child: Hero(
+              tag: "$index",
+              child: Material(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                          .withOpacity(1.0),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +70,14 @@ class Products extends StatelessWidget {
               ],
             ),
           ),
-          GridView.builder(
+          LiveGrid.options(
+            options: LiveOptions(
+                reAnimateOnVisibility: true,
+                showItemInterval: Duration(milliseconds: 100)),
             primary: false,
             shrinkWrap: true,
             itemCount: 50,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                    color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0),
-                    borderRadius: BorderRadius.circular(10)),
-              );
-            },
+            itemBuilder: buildAnimatedItem,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,

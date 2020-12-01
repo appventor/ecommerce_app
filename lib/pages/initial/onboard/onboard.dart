@@ -47,7 +47,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
 
     _rippleAnimation = Tween<double>(
       begin: 0.0,
-      end: 800.0 * 3,
+      end: 800.0,
     ).animate(CurvedAnimation(
       parent: _rippleAnimationController,
       curve: Curves.easeIn,
@@ -65,7 +65,8 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin {
   navigateToLogin() {
     _rippleAnimationController.forward();
     _dataStorage.storeUserData('login');
-    Navigator.of(context).pushReplacementNamed("/login");
+    Future.delayed(Duration(milliseconds: 400),
+        () => Navigator.of(context).pushReplacementNamed("/login"));
   }
 
   @override

@@ -27,10 +27,10 @@ class AppBarSearch extends StatelessWidget {
         )
       ],
       floating: true,
-      expandedHeight: 100,
+      expandedHeight: 110,
       pinned: true,
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(64),
+        preferredSize: Size.fromHeight(70),
         child: Hero(
           tag: "search",
           child: GestureDetector(

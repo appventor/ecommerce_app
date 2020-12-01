@@ -22,13 +22,16 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-      title: Hero(
-          tag: "search",
-          child: CustomSearchBar(
-            enabled: true,
-          )),
-    ));
+    return GestureDetector(
+      onTap: () => context.focusScope.unfocus(),
+      child: Scaffold(
+          appBar: AppBar(
+        title: Hero(
+            tag: "search",
+            child: CustomSearchBar(
+              enabled: true,
+            )),
+      )),
+    );
   }
 }

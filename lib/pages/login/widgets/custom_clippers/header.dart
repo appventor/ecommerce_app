@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../login.dart';
+import 'fadeslidetransition.dart';
 
 class Header extends StatelessWidget {
   final Animation<double> animation;
@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
             animation: animation,
             additionalOffset: 0.0,
             child: Text(
-              'Welcome to Bubble',
+              'Welcome to Estore',
               style: Theme.of(context)
                   .textTheme
                   .headline5
@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
             animation: animation,
             additionalOffset: 16.0,
             child: Text(
-              'Est ad dolor aute ex commodo tempor exercitation proident.',
+              'We are',
               style: Theme.of(context)
                   .textTheme
                   .subtitle1

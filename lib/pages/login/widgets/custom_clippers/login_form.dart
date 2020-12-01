@@ -2,7 +2,6 @@ import 'package:ecommerce/pages/pages.dart';
 import 'package:ecommerce/services/locator.dart';
 import 'package:flutter/material.dart';
 
-import '../../login.dart';
 import 'index.dart';
 
 class LoginForm extends StatelessWidget {
@@ -24,9 +23,9 @@ class LoginForm extends StatelessWidget {
             animation: animation,
             additionalOffset: 0.0,
             child: CustomInputField(
-              label: 'Username or Email',
-              prefixIcon: Icons.person,
-              obscureText: true,
+              label: 'Mobile Number',
+              prefixIcon: Icons.phone_android,
+              obscureText: false,
             ),
           ),
           SizedBox(height: 32),
@@ -71,7 +70,7 @@ class LoginForm extends StatelessWidget {
               ),
               onPressed: () {
                 _dataStorage.storeUserData('username');
-                HomeRouter.navigate(context);
+                Navigator.of(context).pushReplacementNamed("/");
               },
             ),
           ),

@@ -13,9 +13,6 @@ class LoginRouter extends RouterConfig {
 
   static Future<T> navigate<T>(BuildContext context) =>
       Navigator.pushNamed<T>(context, '/login');
-
-  static Future<T> navigateFromSplash<T>(BuildContext context) =>
-      Navigator.pushReplacementNamed(context, '/login');
 }
 
 class Login extends StatefulWidget {
@@ -58,7 +55,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     ));
 
     var clipperOffsetTween = Tween<double>(
-      begin: 900,
+      begin: 700,
       end: 0.0,
     );
     _blueTopClipperAnimation = clipperOffsetTween.animate(
@@ -104,8 +101,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
       body: Stack(children: [
         AnimatedBuilder(
           animation: _whiteTopClipperAnimation,
@@ -166,40 +161,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           ),
         ),
       ]),
-    );
-  }
-}
-
-class FadeSlideTransition extends StatelessWidget {
-  final Animation<double> animation;
-  final double additionalOffset;
-  final Widget child;
-
-  const FadeSlideTransition({
-    @required this.animation,
-    @required this.additionalOffset,
-    @required this.child,
-  })  : assert(animation != null),
-        assert(additionalOffset != null),
-        assert(child != null);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animation,
-      child: child,
-      builder: (_, Widget builderChild) {
-        return Transform.translate(
-          offset: Offset(
-            0.0,
-            (32.0 + additionalOffset) * (1 - animation.value),
-          ),
-          child: Opacity(
-            opacity: animation.value,
-            child: builderChild,
-          ),
-        );
-      },
     );
   }
 }
