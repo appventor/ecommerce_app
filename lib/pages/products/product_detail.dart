@@ -1,3 +1,4 @@
+import 'package:ecommerce/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../pages.dart';
@@ -33,6 +34,9 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> product = [Product(title: "a")];
+    var aa = productToMap(product);
+    print(aa);
     return Scaffold(
         appBar: AppBar(
           actions: [

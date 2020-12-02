@@ -14,35 +14,41 @@ class Category {
   Category({
     this.title,
     this.description,
+    this.imageUrl,
+    this.products,
     this.subCategory,
     this.offers,
-    this.products,
   });
 
   String title;
   String description;
+  String imageUrl;
+  String products;
   List<Category> subCategory;
   List<Category> offers;
-  String products;
 
   Category copyWith({
     String title,
     String description,
+    String imageUrl,
+    String products,
     List<Category> subCategory,
     List<Category> offers,
-    String products,
   }) =>
       Category(
         title: title ?? this.title,
         description: description ?? this.description,
+        imageUrl: imageUrl ?? this.imageUrl,
+        products: products ?? this.products,
         subCategory: subCategory ?? this.subCategory,
         offers: offers ?? this.offers,
-        products: products ?? this.products,
       );
 
   factory Category.fromMap(Map<String, dynamic> json) => Category(
-        title: json["title"] == null ? null : json["title"],
-        description: json["description"] == null ? null : json["description"],
+        title: json["title"] ?? null,
+        description: json["description"] ?? null,
+        imageUrl: json["imageUrl"] ?? null,
+        products: json["products"] ?? null,
         subCategory: json["SubCategory"] == null
             ? null
             : List<Category>.from(
@@ -51,18 +57,18 @@ class Category {
             ? null
             : List<Category>.from(
                 json["offers"].map((x) => Category.fromMap(x))),
-        products: json["products"] == null ? null : json["products"],
       );
 
   Map<String, dynamic> toMap() => {
-        "title": title == null ? null : title,
-        "description": description == null ? null : description,
+        "title": title ?? null,
+        "description": description ?? null,
+        "imageUrl": imageUrl ?? null,
+        "products": products ?? null,
         "SubCategory": subCategory == null
             ? null
             : List<dynamic>.from(subCategory.map((x) => x.toMap())),
         "offers": offers == null
             ? null
             : List<dynamic>.from(offers.map((x) => x.toMap())),
-        "products": products == null ? null : products,
       };
 }
