@@ -21,7 +21,7 @@ String productsMockData = """
     "images":["","","",""],
     "option": [
       {
-        "optionId": "cc",
+        "id": "cc",
         "type": "color",
         "title": "Choose a color",
         "options": [
@@ -31,7 +31,7 @@ String productsMockData = """
         ]
       },
       {
-        "optionId": "ss",
+        "id": "ss",
         "type": "size",
         "title": "Select a size",
         "options": [
@@ -44,7 +44,7 @@ String productsMockData = """
         ]
       },
       {
-        "optionId": "ff",
+        "id": "ff",
         "type": "fit",
         "title": "Choose a fit design",
         "options": [
@@ -56,7 +56,7 @@ String productsMockData = """
     ],
     "variants":[
       {
-        "variantId":"q1w2e3r4/cc-c1/ss-s3/ff-f1",
+        "id":"q1w2e3r4/cc-c1/ss-s3/ff-f1",
         "skuId": "sku123456",
         "price": 299.50,
         "offer": 10,
@@ -64,7 +64,7 @@ String productsMockData = """
         "images":["","","",""]
       },
       {
-        "variantId":"q1w2e3r4/cc-c2/ss-s3/ff-f2",
+        "id":"q1w2e3r4/cc-c2/ss-s3/ff-f2",
         "skuId": "sku123456",
         "price": 299.50,
         "offer": 10,
@@ -72,7 +72,7 @@ String productsMockData = """
         "images":["","","",""]
       },
       {
-        "variantId":"q1w2e3r4/cc-c2/ss-s4/ff-f1",
+        "id":"q1w2e3r4/cc-c2/ss-s4/ff-f1",
         "skuId": "sku123456",
         "price": 299.50,
         "offer": 10,
@@ -80,7 +80,7 @@ String productsMockData = """
         "images":["","","",""]
       },
       {
-        "variantId":"q1w2e3r4/cc-c3/ss-s6/ff-f3",
+        "id":"q1w2e3r4/cc-c3/ss-s6/ff-f3",
         "skuId": "sku123456",
         "price": 349.50,
         "offer": 10,
@@ -100,7 +100,7 @@ String productToMap(List<Product> data) =>
 
 class Product {
   Product({
-    this.productId,
+    this.id,
     this.title,
     this.description,
     this.specs,
@@ -116,7 +116,7 @@ class Product {
     this.variants,
   });
 
-  String productId;
+  String id;
   String title;
   String description;
   String specs;
@@ -132,7 +132,7 @@ class Product {
   List<Product> variants;
 
   Product copyWith({
-    String productId,
+    String id,
     String title,
     String description,
     String specs,
@@ -148,7 +148,7 @@ class Product {
     List<Product> variants,
   }) =>
       Product(
-        productId: productId ?? this.productId,
+        id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,
         specs: specs ?? this.specs,
@@ -165,7 +165,7 @@ class Product {
       );
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
-        productId: json["productId"] == null ? null : json["productId"],
+        id: json["id"] == null ? null : json["id"],
         title: json["title"] == null ? null : json["title"],
         description: json["description"] == null ? null : json["description"],
         specs: json["specs"] == null ? null : json["specs"],
@@ -190,7 +190,7 @@ class Product {
       );
 
   Map<String, dynamic> toMap() => {
-        "productId": productId == null ? null : productId,
+        "id": id == null ? null : id,
         "title": title == null ? null : title,
         "description": description == null ? null : description,
         "specs": specs == null ? null : specs,
@@ -214,42 +214,41 @@ class Product {
 
 class ProductOption {
   ProductOption({
-    this.optionId,
+    this.id,
     this.type,
     this.title,
     this.options,
   });
 
-  String optionId;
+  String id;
   String type;
   String title;
-  List<OptionOption> options;
+  List<Option> options;
 
   ProductOption copyWith({
-    String optionId,
+    String id,
     String type,
     String title,
-    List<OptionOption> options,
+    List<Option> options,
   }) =>
       ProductOption(
-        optionId: optionId ?? this.optionId,
+        id: id ?? this.id,
         type: type ?? this.type,
         title: title ?? this.title,
         options: options ?? this.options,
       );
 
   factory ProductOption.fromMap(Map<String, dynamic> json) => ProductOption(
-        optionId: json["optionId"] == null ? null : json["optionId"],
+        id: json["id"] == null ? null : json["id"],
         type: json["type"] == null ? null : json["type"],
         title: json["title"] == null ? null : json["title"],
         options: json["options"] == null
             ? null
-            : List<OptionOption>.from(
-                json["options"].map((x) => OptionOption.fromMap(x))),
+            : List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
-        "optionId": optionId == null ? null : optionId,
+        "id": id == null ? null : id,
         "type": type == null ? null : type,
         "title": title == null ? null : title,
         "options": options == null
@@ -258,8 +257,8 @@ class ProductOption {
       };
 }
 
-class OptionOption {
-  OptionOption({
+class Option {
+  Option({
     this.id,
     this.value,
   });
@@ -267,16 +266,16 @@ class OptionOption {
   String id;
   String value;
 
-  OptionOption copyWith({
+  Option copyWith({
     String id,
     String value,
   }) =>
-      OptionOption(
+      Option(
         id: id ?? this.id,
         value: value ?? this.value,
       );
 
-  factory OptionOption.fromMap(Map<String, dynamic> json) => OptionOption(
+  factory Option.fromMap(Map<String, dynamic> json) => Option(
         id: json["id"] == null ? null : json["id"],
         value: json["value"] == null ? null : json["value"],
       );
