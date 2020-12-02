@@ -1,0 +1,119 @@
+[
+  '{{repeat(5, 7)}}',
+  {
+    id: '{{objectId()}}',
+    title: '{{lorem(1, "words")}}',
+    description:'{{lorem(1, "paragraphs")}}',
+    imageUrl: 'http://placehold.it/32x32',
+    subCategory:
+    [
+      '{{repeat(2,5)}}',
+      {
+        id: '{{objectId()}}',
+        title: '{{lorem(1, "words")}}',
+        description:'{{lorem(1, "paragraphs")}}',
+        imageUrl: 'http://placehold.it/32x32',
+        products:
+        [
+          '{{repeat(10,25)}}',
+          {
+            id:'{{objectId()}}',
+            title:'{{lorem(1, "words")}}',
+            description:'{{lorem(1, "paragraphs")}}',
+            specs:'{{lorem(1, "paragraphs")}}',
+            stock:'{{integer(1, 101)}}',
+            skuId:'{{objectId()}}',
+            price:'{{floating(1000, 4000, 2, "00.00")}}',
+            offer:'{{floating(0, 100, 2, "00.00")}}',
+            brand:'{{lorem(1, "words")}}',
+            category:'{{objectId()}}/{{objectId()}}',
+            images:
+            [
+              '{{repeat(3,5)}}',
+              "'http://placehold.it/200x200'"
+            ],
+            options:
+            [
+              '{{repeat(1,3)}}',
+              {
+                id: '{{objectId()}}',
+                type: '{{lorem(1, "words")}}',
+                title: '{{lorem(3, "words")}}',
+                option: {
+                  id: '{{objectId()}}',
+                  value: '{{lorem(1, "words")}}'
+                }
+              }
+            ],
+            variants:
+            [
+              '{{repeat(2,16)}}',
+              {
+                id: '{{objectId()}}',
+                images:
+                [
+                  '{{repeat(1,3)}}',
+                  "'http://placehold.it/200x200'"
+                ],
+                skuId: '{{objectId()}}',
+                stock:'{{integer(1, 40)}}',
+                price:'{{floating(1000, 4000, 2, "00.00")}}',
+                offer:'{{floating(0, 100, 2, "00.00")}}'
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    products:
+        [
+          '{{repeat(10,25)}}',
+          {
+            id:'{{objectId()}}',
+            title:'{{lorem(1, "words")}}',
+            description:'{{lorem(1, "paragraphs")}}',
+            specs:'{{lorem(1, "paragraphs")}}',
+            stock:'{{integer(1, 101)}}',
+            skuId:'{{objectId()}}',
+            price:'{{floating(1000, 4000, 2, "00.00")}}',
+            offer:'{{floating(0, 100, 2, "00.00")}}',
+            brand:'{{lorem(1, "words")}}',
+            category:'{{objectId()}}/{{objectId()}}',
+            images:
+            [
+              '{{repeat(3,5)}}',
+              "'http://placehold.it/200x200'"
+            ],
+            options:
+            [
+              '{{repeat(1,3)}}',
+              {
+                id: '{{objectId()}}',
+                type: '{{lorem(1, "words")}}',
+                title: '{{lorem(3, "words")}}',
+                option: {
+                  id: '{{objectId()}}',
+                  value: '{{lorem(1, "words")}}'
+                }
+              }
+            ],
+            variants:
+            [
+              '{{repeat(2,16)}}',
+              {
+                id: '{{objectId()}}',
+                images:
+                [
+                  '{{repeat(1,3)}}',
+                  "'http://placehold.it/200x200'"
+                ],
+                skuId: '{{objectId()}}',
+                stock:'{{integer(1, 40)}}',
+                price:'{{floating(1000, 4000, 2, "00.00")}}',
+                offer:'{{floating(0, 100, 2, "00.00")}}'
+              }
+            ]
+          }
+        ]
+  }
+]
