@@ -34,9 +34,6 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Product> product = [Product(title: "a")];
-    var aa = productToMap(product);
-    print(aa);
     return Scaffold(
         appBar: AppBar(
           actions: [

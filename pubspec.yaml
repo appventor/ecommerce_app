@@ -34,6 +34,7 @@ dependencies:
   flutter_markdown: ^0.5.1
 
   #utilities
+  provider: ^4.3.2+2
   get_storage: ^1.3.2
   get_it: ^5.0.1
   build_context: ^2.0.4

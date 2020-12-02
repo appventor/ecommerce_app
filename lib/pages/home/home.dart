@@ -21,26 +21,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool isLoggedIn;
-  int index;
+  bool _loaded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: IndexedStack(
-        index: index,
-        children: [
-          Splash(
-            loaded: (bool loaded) {
-              if (loaded)
+    return AnimatedSwitcher(
+      duration: Duration(microseconds: 200),
+      switchInCurve: Curves.easeIn,
+      child: _loaded
+          ? LandingPage()
+          : Splash(
+              loaded: (bool loaded) {
                 setState(() {
-                  index = 1;
+                  _loaded = loaded;
                 });
-            },
-          ),
-          LandingPage(),
-        ],
-      ),
+              },
+            ),
     );
   }
 }

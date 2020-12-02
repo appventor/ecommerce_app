@@ -7,12 +7,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   setupLocator();
-  runApp(RootApp());
+  runApp(Provider<ProductsBloc>(
+    create: (BuildContext context) => ProductsBloc(),
+    child: RootApp(),
+  ));
 }
 
 class RootApp extends StatelessWidget {
-  const RootApp({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

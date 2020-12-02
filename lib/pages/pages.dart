@@ -1,5 +1,8 @@
-export 'package:build_context/build_context.dart';
 export 'dart:math';
+export 'package:build_context/build_context.dart';
+export 'package:provider/provider.dart';
+
+export '../bloc/products_bloc.dart';
 
 export '../services/navigationService.dart';
 export 'initial/onboard/onboard.dart';
@@ -11,7 +14,9 @@ export 'home/splash.dart';
 export 'home/landing.dart';
 export 'home/appSearchBar.dart';
 export 'home/app_drawer.dart';
+
 export 'profile/profile_page.dart';
+
 export 'products/products_home.dart';
 export 'products/product_detail.dart';
 export 'products/product_variant.dart';
