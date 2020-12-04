@@ -1,9 +1,7 @@
 export 'dart:math';
 export 'package:build_context/build_context.dart';
 export 'package:provider/provider.dart';
-
 export '../bloc/products_bloc.dart';
-
 export '../services/navigationService.dart';
 export 'initial/onboard/onboard.dart';
 export 'initial/page404.dart';

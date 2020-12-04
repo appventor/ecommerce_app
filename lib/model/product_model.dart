@@ -125,7 +125,7 @@ class Product {
   String categoryId;
   int stock;
   String skuId;
-  int price;
+  double price;
   int offer;
   List<String> images;
   List<ProductOption> option;
@@ -141,7 +141,7 @@ class Product {
     String categoryId,
     int stock,
     String skuId,
-    int price,
+    double price,
     int offer,
     List<String> images,
     List<ProductOption> option,
@@ -174,7 +174,7 @@ class Product {
         categoryId: json["categoryId"] == null ? null : json["categoryId"],
         stock: json["stock"] == null ? null : json["stock"],
         skuId: json["skuId"] == null ? null : json["skuId"],
-        price: json["price"] == null ? null : json["price"],
+        price: json["price"] == null ? null : json["price"].toDouble(),
         offer: json["offer"] == null ? null : json["offer"],
         images: json["images"] == null
             ? null

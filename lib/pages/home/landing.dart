@@ -1,3 +1,5 @@
+import 'package:ecommerce/bloc/products_bloc.dart';
+import 'package:ecommerce/services/locator.dart';
 import 'package:flutter/material.dart';
 import '../pages.dart';
 
@@ -8,6 +10,11 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: AppDrawer(),
@@ -15,9 +22,9 @@ class _LandingPageState extends State<LandingPage> {
             headerSliverBuilder: (context, isInnerBoxScrolled) =>
                 [AppBarSearch()],
             body: RefreshIndicator(
-              onRefresh: () {
-                setState(() {});
-                return Future.delayed(Duration(seconds: 1));
+              onRefresh: () async {
+                await Provider.of<ProductsBloc>(context, listen: false)
+                    .fetchLandingPageData();
               },
               child: ListView(
                 padding: EdgeInsets.all(0),

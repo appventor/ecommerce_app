@@ -1,44 +1,65 @@
 // To parse this JSON data, do
 //
-//     final category = categoryFromMap(jsonString);
+//     final categories = categoriesFromMap(jsonString);
 
 import 'dart:convert';
 
 import 'models.dart';
 
-String categoryMockData = """
-[
-  {
-    "id": "q1w2e3r4t5",
-    "title": "Mens",
-    "description": "Dolor quis occaecat laborum proident ad quis et consequat laboris laboris",
-    "imageUrl": "",
-    "subCategory": [{
-      "id": "q1w2e3r4t5/a1s2d3f4g5",
-      "title": "Casual Wear",
-      "description": "Dolor quis occaecat laborum proident ad quis et consequat laboris laboris",
-      "imageUrl": "",
-    }],
-    "offers": [
-      {
-        "id":"",
-        "title":"",
-        "description":"",
-        "price":12.50,
-        "offer": 10,
-        "imageUrl": ""
-      }
-    ],
-    "products": $productsMockData
-  }
-]
-""";
+LandingPageData categoriesFromMap(String str) =>
+    LandingPageData.fromMap(json.decode(str));
 
-List<Category> categoryFromMap(String str) =>
-    List<Category>.from(json.decode(str).map((x) => Category.fromMap(x)));
+String categoriesToMap(LandingPageData data) => json.encode(data.toMap());
 
-String categoryToMap(List<Category> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+class LandingPageData {
+  LandingPageData({
+    this.category,
+    this.offers,
+    this.products,
+  });
+
+  List<Category> category;
+  List<Category> offers;
+  List<Product> products;
+
+  LandingPageData copyWith({
+    List<Category> category,
+    List<Category> offers,
+    List<Product> products,
+  }) =>
+      LandingPageData(
+        category: category ?? this.category,
+        offers: offers ?? this.offers,
+        products: products ?? this.products,
+      );
+
+  factory LandingPageData.fromMap(Map<String, dynamic> json) => LandingPageData(
+        category: json["category"] == null
+            ? null
+            : List<Category>.from(
+                json["category"].map((x) => Category.fromMap(x))),
+        offers: json["offers"] == null
+            ? null
+            : List<Category>.from(
+                json["offers"].map((x) => Category.fromMap(x))),
+        products: json["products"] == null
+            ? null
+            : List<Product>.from(
+                json["products"].map((x) => Product.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "category": category == null
+            ? null
+            : List<dynamic>.from(category.map((x) => x.toMap())),
+        "offers": offers == null
+            ? null
+            : List<dynamic>.from(offers.map((x) => x.toMap())),
+        "products": products == null
+            ? null
+            : List<dynamic>.from(products.map((x) => x.toMap())),
+      };
+}
 
 class Category {
   Category({
@@ -47,8 +68,8 @@ class Category {
     this.description,
     this.imageUrl,
     this.subCategory,
-    this.offers,
     this.products,
+    this.offer,
   });
 
   String id;
@@ -56,8 +77,8 @@ class Category {
   String description;
   String imageUrl;
   List<Category> subCategory;
-  List<Offer> offers;
-  List<Product> products;
+  String products;
+  String offer;
 
   Category copyWith({
     String id,
@@ -65,8 +86,8 @@ class Category {
     String description,
     String imageUrl,
     List<Category> subCategory,
-    List<Offer> offers,
-    List<Product> products,
+    String products,
+    String offer,
   }) =>
       Category(
         id: id ?? this.id,
@@ -74,8 +95,8 @@ class Category {
         description: description ?? this.description,
         imageUrl: imageUrl ?? this.imageUrl,
         subCategory: subCategory ?? this.subCategory,
-        offers: offers ?? this.offers,
         products: products ?? this.products,
+        offer: offer ?? this.offer,
       );
 
   factory Category.fromMap(Map<String, dynamic> json) => Category(
@@ -87,13 +108,8 @@ class Category {
             ? null
             : List<Category>.from(
                 json["subCategory"].map((x) => Category.fromMap(x))),
-        offers: json["offers"] == null
-            ? null
-            : List<Offer>.from(json["offers"].map((x) => Offer.fromMap(x))),
-        products: json["products"] == null
-            ? null
-            : List<Product>.from(
-                json["products"].map((x) => Product.fromMap(x))),
+        products: json["products"] == null ? null : json["products"],
+        offer: json["offer"] == null ? null : json["offer"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -104,11 +120,7 @@ class Category {
         "subCategory": subCategory == null
             ? null
             : List<dynamic>.from(subCategory.map((x) => x.toMap())),
-        "offers": offers == null
-            ? null
-            : List<dynamic>.from(offers.map((x) => x.toMap())),
-        "products": products == null
-            ? null
-            : List<dynamic>.from(products.map((x) => x.toMap())),
+        "products": products == null ? null : products,
+        "offer": offer == null ? null : offer,
       };
 }

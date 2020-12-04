@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ecommerce/bloc/products_bloc.dart';
+
 import '../../services/locator.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class Splash extends StatefulWidget {
 
 class SplashState extends State<Splash> {
   SplashState() {
-    Timer(const Duration(milliseconds: 400), () {
+    Timer(const Duration(milliseconds: 100), () {
       setState(() {
         _logoStyle = FlutterLogoStyle.horizontal;
       });
@@ -34,7 +36,7 @@ class SplashState extends State<Splash> {
 
   void handleStartupLogic() {
     String user = _dataStorage.getUserData();
-    Timer((const Duration(milliseconds: 600)), () {
+    Timer((const Duration(milliseconds: 900)), () {
       switch (user) {
         case 'nil':
           OnboardRouter.navigate(context);
@@ -43,6 +45,8 @@ class SplashState extends State<Splash> {
           LoginRouter.navigate(context);
           break;
         default:
+          Provider.of<ProductsBloc>(context, listen: false)
+              .fetchLandingPageData();
           widget.loaded(true);
       }
     });

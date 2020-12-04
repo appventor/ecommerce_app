@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
 
   #Firebase dependencies
-  firebase_core: "0.5.2"
+  firebase_core: "0.5.2+1"
   firebase_auth: "^0.18.3"
   firebase_crashlytics: "^0.2.3"
-  cloud_firestore: "^0.14.3"
+  cloud_firestore: "^0.14.3+1"
   cloud_functions: "^0.7.0+1"
-  firebase_storage: "^5.0.1"
+  firebase_storage: "^5.1.0"
   firebase_messaging: "^8.0.0-dev.8"
   firebase_analytics: "^6.2.0"
   firebase_dynamic_links: "^0.6.2"
