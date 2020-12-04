@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'models.dart';
 
 LandingPageData categoriesFromMap(String str) =>
@@ -77,7 +79,7 @@ class Category {
   String description;
   String imageUrl;
   List<Category> subCategory;
-  String products;
+  DocumentReference products;
   String offer;
 
   Category copyWith({
@@ -86,7 +88,7 @@ class Category {
     String description,
     String imageUrl,
     List<Category> subCategory,
-    String products,
+    DocumentReference products,
     String offer,
   }) =>
       Category(

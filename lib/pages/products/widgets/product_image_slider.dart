@@ -6,9 +6,10 @@ import 'package:photo_view/photo_view_gallery.dart';
 import '../../pages.dart';
 
 class ProductImageSlider extends StatefulWidget {
-  final String productID;
+  final String id;
+  final List<String> images;
 
-  const ProductImageSlider({Key key, @required this.productID})
+  const ProductImageSlider({Key key, @required this.images, this.id})
       : super(key: key);
 
   @override
@@ -17,26 +18,35 @@ class ProductImageSlider extends StatefulWidget {
 
 class _ProductImageSliderState extends State<ProductImageSlider> {
   int _current = 0;
-  List<Widget> items = List.generate(
-      4,
-      (index) => Container(
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            height: 300,
-            decoration: BoxDecoration(
-                color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                    .withOpacity(1.0),
-                borderRadius: BorderRadius.circular(10)),
-          ));
+  List<Widget> items;
+
+  @override
+  void initState() {
+    items = List.generate(
+        widget.images.length,
+        (index) => Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              height: 300,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(widget.images[index])),
+                  color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                      .withOpacity(1.0),
+                  borderRadius: BorderRadius.circular(10)),
+            ));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Hero(
-            tag: "${widget.productID}",
+            tag: "${widget.id}",
             child: Stack(children: [
               GestureDetector(
-                onTap: () => showImageViewer(images: ["", "", ""]),
+                onTap: () => showImageViewer(images: widget.images),
                 child: CarouselSlider(
                   items: items,
                   options: CarouselOptions(
@@ -86,7 +96,7 @@ showImageViewer({List<String> images}) {
             scrollPhysics: const BouncingScrollPhysics(),
             builder: (BuildContext context, int index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: NetworkImage("https://picsum.photos/50$index"),
+                imageProvider: NetworkImage(images[index]),
                 initialScale: PhotoViewComputedScale.contained * 1,
                 heroAttributes:
                     PhotoViewHeroAttributes(tag: images[index].toString()),

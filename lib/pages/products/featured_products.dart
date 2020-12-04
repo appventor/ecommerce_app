@@ -4,19 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../pages.dart';
 
-class Products extends StatefulWidget {
+class FeaturedProducts extends StatefulWidget {
   @override
-  _ProductsState createState() => _ProductsState();
+  _FeaturedProductsState createState() => _FeaturedProductsState();
 }
 
-class _ProductsState extends State<Products> {
+class _FeaturedProductsState extends State<FeaturedProducts> {
   List<Product> products;
 
-  Widget buildAnimatedItem(
-    BuildContext context,
-    int index,
-    Animation<double> animation,
-  ) =>
+  Widget buildAnimatedItem({Animation<double> animation, Product product}) =>
       FadeTransition(
         opacity: Tween<double>(
           begin: 0,
@@ -29,16 +25,17 @@ class _ProductsState extends State<Products> {
           ).animate(animation),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed("/product/$index");
+              Navigator.of(context)
+                  .pushNamed("/product/${product.id}", arguments: product);
             },
             child: Hero(
-              tag: "$index",
+              tag: "${product.id}",
               child: Material(
                 child: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(products[index].images.first)),
+                          image: NetworkImage(product.images.first)),
                       // color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
                       //     .withOpacity(1.0),
                       borderRadius: BorderRadius.circular(10)),
@@ -82,7 +79,8 @@ class _ProductsState extends State<Products> {
                   primary: false,
                   shrinkWrap: true,
                   itemCount: products?.length ?? 0,
-                  itemBuilder: buildAnimatedItem,
+                  itemBuilder: (context, index, animation) => buildAnimatedItem(
+                      animation: animation, product: products[index]),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,

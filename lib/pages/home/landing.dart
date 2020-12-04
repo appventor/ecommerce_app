@@ -1,5 +1,4 @@
 import 'package:ecommerce/bloc/products_bloc.dart';
-import 'package:ecommerce/services/locator.dart';
 import 'package:flutter/material.dart';
 import '../pages.dart';
 
@@ -31,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
                 children: [
                   SizedBox(height: 140, child: CategoryTiles()),
                   OfferCarousel(),
-                  Products()
+                  FeaturedProducts()
                 ],
               ),
             )));

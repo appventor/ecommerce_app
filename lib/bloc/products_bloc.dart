@@ -5,7 +5,7 @@ import '../model/models.dart';
 class ProductsBloc extends ChangeNotifier {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   LandingPageData landingPageData;
-  List<Product> products;
+  Products products;
 
   Future<LandingPageData> fetchLandingPageData() async {
     CollectionReference ref = firestore.collection("home");
@@ -14,5 +14,20 @@ class ProductsBloc extends ChangeNotifier {
     print("${snapshot.data()}");
     notifyListeners();
     return landingPageData;
+  }
+
+  Future<Product> fetchProduct(String productID) async {
+    Product productData;
+    CollectionReference ref = firestore.collection("products");
+    DocumentSnapshot snapshot = await ref.doc("productID").get();
+    products = Products.fromMap(snapshot.data());
+    products.products.where((product) {
+      if (product.id == productID) {
+        productData = product;
+        return true;
+      } else
+        return false;
+    });
+    return productData;
   }
 }

@@ -15,7 +15,7 @@ export 'home/app_drawer.dart';
 
 export 'profile/profile_page.dart';
 
-export 'products/products_home.dart';
+export 'products/featured_products.dart';
 export 'products/product_detail.dart';
 export 'products/product_variant.dart';
 export 'products/widgets/product_image_slider.dart';

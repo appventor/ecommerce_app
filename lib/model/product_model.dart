@@ -98,6 +98,19 @@ List<Product> productFromMap(String str) =>
 String productToMap(List<Product> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
+class Products {
+  List<Product> products;
+
+  Products({this.products});
+
+  factory Products.fromMap(Map<String, dynamic> json) => Products(
+        products: json["products"] == null
+            ? null
+            : List<Product>.from(
+                json["products"].map((x) => Product.fromMap(x))),
+      );
+}
+
 class Product {
   Product({
     this.id,
