@@ -11,21 +11,7 @@ class AppBarSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       title: Text("Estore"),
-      actions: [
-        IconButton(
-          splashRadius: 25,
-          icon: Icon(
-            Icons.favorite,
-            color: Colors.red,
-          ),
-          onPressed: () {},
-        ),
-        IconButton(
-          splashRadius: 25,
-          icon: Icon(Icons.shopping_cart_rounded),
-          onPressed: () {},
-        )
-      ],
+      actions: [WishBadge(), CartBadge()],
       floating: true,
       expandedHeight: 110,
       pinned: true,

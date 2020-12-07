@@ -24,6 +24,7 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.shopping_cart_outlined),
                 title: Text("My Cart"),
+                onTap: () => Navigator.of(context).pushNamed("/cart"),
               ),
               ListTile(
                 leading: Icon(Icons.assignment_outlined),

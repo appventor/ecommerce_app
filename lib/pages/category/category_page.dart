@@ -47,16 +47,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
-          )
-        ],
+        actions: [WishBadge(), CartBadge()],
       ),
       body: widget.category != null
           ? CatalogBrowser(productRef: widget.category.products)

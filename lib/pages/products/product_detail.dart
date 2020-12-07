@@ -59,14 +59,8 @@ class _ProductDetailState extends State<ProductDetail> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(
-              icon: Icon(Icons.favorite),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
-            )
+            WishBadge(),
+            CartBadge(),
           ],
         ),
         body: product != null

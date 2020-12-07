@@ -28,5 +28,6 @@ abstract class RouterConfig {
     ProfileRouter(),
     ProductRouter(),
     CategoryRouter(),
+    CartRouter(),
   ];
 }
