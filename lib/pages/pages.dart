@@ -38,3 +38,4 @@ export 'search/searchbar.dart';
 export 'search/searchpage.dart';
 
 export 'wishlist/wishBadge.dart';
+export 'wishlist/wishlistPage.dart';

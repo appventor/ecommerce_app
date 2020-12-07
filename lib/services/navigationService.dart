@@ -28,6 +28,7 @@ abstract class RouterConfig {
     CategoryRouter(),
     CartRouter(),
     CheckoutRouter(),
-    OrdersRouter()
+    OrdersRouter(),
+    WishlistRouter(),
   ];
 }

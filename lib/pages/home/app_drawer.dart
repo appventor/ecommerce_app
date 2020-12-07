@@ -12,14 +12,57 @@ class AppDrawer extends StatelessWidget {
           ListView(
             shrinkWrap: true,
             children: [
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed("/profile"),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  height: 150,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        minRadius: 60,
+                        backgroundImage:
+                            NetworkImage("https://picsum.photos/150"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Profile Name",
+                              style: context.textTheme.headline6,
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.email),
+                                Text("email@org.com")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.phone),
+                                Text("+91 8073748630")
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Divider(),
               ListTile(
                 leading: Icon(Icons.account_circle_outlined),
                 title: Text("My Profile"),
-                onTap: () => ProfileRouter.navigate(context),
+                onTap: () => Navigator.of(context).pushNamed("/profile"),
               ),
               ListTile(
                 leading: Icon(Icons.favorite_outline),
                 title: Text("My Wishlist"),
+                onTap: () => Navigator.of(context).pushNamed("/wishlist"),
               ),
               ListTile(
                 leading: Icon(Icons.shopping_cart_outlined),
@@ -29,15 +72,16 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.assignment_outlined),
                 title: Text("My Orders"),
+                onTap: () => Navigator.of(context).pushNamed("/orders"),
               ),
-              ListTile(
-                leading: Icon(Icons.account_circle_outlined),
-                title: Text("My Profile"),
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle_outlined),
-                title: Text("My Profile"),
-              )
+              // ListTile(
+              //   leading: Icon(Icons.account_circle_outlined),
+              //   title: Text("My Profile"),
+              // ),
+              // ListTile(
+              //   leading: Icon(Icons.account_circle_outlined),
+              //   title: Text("My Profile"),
+              // )
             ],
           ),
           Spacer(),

@@ -6,7 +6,7 @@ class WishBadge extends StatelessWidget {
     return IconButton(
       splashRadius: 25,
       icon: Icon(Icons.favorite),
-      onPressed: () => Navigator.of(context).pushNamed("/cart"),
+      onPressed: () => Navigator.of(context).pushNamed("/wishlist"),
     );
   }
 }
