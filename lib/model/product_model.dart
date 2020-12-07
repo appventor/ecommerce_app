@@ -139,7 +139,7 @@ class Product {
   int stock;
   String skuId;
   double price;
-  int offer;
+  double offer;
   List<String> images;
   List<ProductOption> option;
   List<Product> variants;
@@ -155,7 +155,7 @@ class Product {
     int stock,
     String skuId,
     double price,
-    int offer,
+    double offer,
     List<String> images,
     List<ProductOption> option,
     List<Product> variants,
@@ -188,7 +188,7 @@ class Product {
         stock: json["stock"] == null ? null : json["stock"],
         skuId: json["skuId"] == null ? null : json["skuId"],
         price: json["price"] == null ? null : json["price"].toDouble(),
-        offer: json["offer"] == null ? null : json["offer"],
+        offer: json["offer"] == null ? null : json["offer"].toDouble(),
         images: json["images"] == null
             ? null
             : List<String>.from(json["images"].map((x) => x)),

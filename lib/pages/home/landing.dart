@@ -2,17 +2,7 @@ import 'package:ecommerce/bloc/products_bloc.dart';
 import 'package:flutter/material.dart';
 import '../pages.dart';
 
-class LandingPage extends StatefulWidget {
-  @override
-  _LandingPageState createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +16,14 @@ class _LandingPageState extends State<LandingPage> {
                     .fetchLandingPageData();
               },
               child: ListView(
-                padding: EdgeInsets.all(0),
                 children: [
                   SizedBox(height: 140, child: CategoryTiles()),
                   OfferCarousel(),
-                  FeaturedProducts()
+                  FeaturedProducts(
+                    products: Provider.of<ProductsBloc>(context)
+                        .landingPageData
+                        ?.products,
+                  )
                 ],
               ),
             )));

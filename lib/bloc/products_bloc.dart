@@ -16,10 +16,18 @@ class ProductsBloc extends ChangeNotifier {
     return landingPageData;
   }
 
+  Future<List<Product>> fetchProducts(DocumentReference productRef) async {
+    DocumentSnapshot snapshot = await productRef.get();
+    print("ProductREF: ${snapshot.data()}");
+    products = Products.fromMap(snapshot.data());
+    return products.products;
+  }
+
   Future<Product> fetchProduct(String productID) async {
     Product productData;
     CollectionReference ref = firestore.collection("products");
-    DocumentSnapshot snapshot = await ref.doc("productID").get();
+    DocumentSnapshot snapshot = await ref.doc(productID).get();
+    print("ProductREF: ${snapshot.data()}");
     products = Products.fromMap(snapshot.data());
     products.products.where((product) {
       if (product.id == productID) {

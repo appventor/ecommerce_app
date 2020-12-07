@@ -23,6 +23,7 @@ export 'products/widgets/add_to_cart_button.dart';
 export 'products/widgets/product_description.dart';
 
 export 'category/category_tiles.dart';
+export 'category/category_page.dart';
 
 export 'offers/offer_carousel.dart';
 

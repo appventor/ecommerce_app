@@ -27,5 +27,6 @@ abstract class RouterConfig {
     SearchRouter(),
     ProfileRouter(),
     ProductRouter(),
+    CategoryRouter(),
   ];
 }

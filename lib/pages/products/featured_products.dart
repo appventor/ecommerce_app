@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import '../pages.dart';
 
 class FeaturedProducts extends StatefulWidget {
+  final List<Product> products;
+
+  const FeaturedProducts({Key key, this.products}) : super(key: key);
   @override
   _FeaturedProductsState createState() => _FeaturedProductsState();
 }
 
 class _FeaturedProductsState extends State<FeaturedProducts> {
-  List<Product> products;
-
   Widget buildAnimatedItem({Animation<double> animation, Product product}) =>
       FadeTransition(
         opacity: Tween<double>(
@@ -48,8 +49,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
 
   @override
   Widget build(BuildContext context) {
-    products = Provider.of<ProductsBloc>(context).landingPageData?.products;
-    return products != null
+    return widget.products != null
         ? Container(
             margin: EdgeInsets.symmetric(horizontal: 8),
             child: Column(
@@ -78,9 +78,9 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                       showItemInterval: Duration(milliseconds: 100)),
                   primary: false,
                   shrinkWrap: true,
-                  itemCount: products?.length ?? 0,
+                  itemCount: widget.products.length,
                   itemBuilder: (context, index, animation) => buildAnimatedItem(
-                      animation: animation, product: products[index]),
+                      animation: animation, product: widget.products[index]),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,

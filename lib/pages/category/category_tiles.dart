@@ -14,28 +14,34 @@ class CategoryTiles extends StatelessWidget {
             shrinkWrap: true,
             itemCount: categories.length,
             itemBuilder: (context, index) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 8),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(categories[index].imageUrl),
-                      // backgroundColor:
-                      //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                      //         .withOpacity(1.0),
+              return GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                    "/category/${categories[index].id}",
+                    arguments: categories[index]),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 8),
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage:
+                            NetworkImage(categories[index].imageUrl),
+                        // backgroundColor:
+                        //     Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                        //         .withOpacity(1.0),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Text(
-                      categories[index].title,
-                      style: context.textTheme.bodyText1,
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Text(
+                        categories[index].title,
+                        style: context.textTheme.bodyText1,
+                      ),
+                    )
+                  ],
+                ),
               );
             },
           )
