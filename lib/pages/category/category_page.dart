@@ -42,12 +42,80 @@ class CategoryDetail extends StatefulWidget {
   _CategoryDetailState createState() => _CategoryDetailState();
 }
 
-class _CategoryDetailState extends State<CategoryDetail> {
+class _CategoryDetailState extends State<CategoryDetail>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+  bool _isList = false;
+
+  List<FilterProducts> choices = [
+    FilterProducts(title: 'Home', icon: Icons.home),
+    FilterProducts(title: 'Bookmarks', icon: Icons.bookmark),
+    FilterProducts(title: 'Settings', icon: Icons.settings),
+  ];
+  @override
+  void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Product List"),
         actions: [WishBadge(), CartBadge()],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(60),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  widget.category.title,
+                  style: context.accentTextTheme.headline5,
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isList = !_isList;
+                          _isList
+                              ? _animationController.forward()
+                              : _animationController.reverse();
+                        });
+                      },
+                      child: AnimatedIcon(
+                        icon: AnimatedIcons.list_view,
+                        size: 30,
+                        progress: _animationController,
+                      ),
+                    ),
+                    PopupMenuButton<FilterProducts>(
+                      initialValue: choices[0],
+                      enableFeedback: true,
+                      icon: Icon(
+                        Icons.filter_list,
+                        size: 30,
+                      ),
+                      itemBuilder: (context) {
+                        return choices
+                            .map((filter) => PopupMenuItem(
+                                  value: filter,
+                                  child: Text(filter.title),
+                                ))
+                            .toList();
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
       ),
       body: widget.category != null
           ? CatalogBrowser(productRef: widget.category.products)
@@ -80,7 +148,13 @@ class _CatalogBrowserState extends State<CatalogBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    print("catalog browser");
     return ProductList(products: products);
   }
+}
+
+class FilterProducts {
+  final String title;
+  final IconData icon;
+
+  FilterProducts({this.title, this.icon});
 }

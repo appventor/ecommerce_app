@@ -27,6 +27,10 @@ export 'category/category_page.dart';
 
 export 'offers/offer_carousel.dart';
 
+export 'orders/orderHistory.dart';
+
+export 'checkout/checkout.dart';
+
 export 'shoppingcart/shopping_cart.dart';
 export 'shoppingcart/cartBadge.dart';
 

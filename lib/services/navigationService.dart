@@ -1,6 +1,3 @@
-import 'package:ecommerce/pages/checkout/checkout.dart';
-import 'package:ecommerce/pages/login/login.dart';
-import 'package:ecommerce/pages/search/searchpage.dart';
 import 'package:flutter/material.dart';
 import '../pages/pages.dart';
 
@@ -31,5 +28,6 @@ abstract class RouterConfig {
     CategoryRouter(),
     CartRouter(),
     CheckoutRouter(),
+    OrdersRouter()
   ];
 }
