@@ -16,8 +16,9 @@ class LandingPage extends StatelessWidget {
                     .fetchLandingPageData();
               },
               child: ListView(
+                padding: EdgeInsets.all(0),
                 children: [
-                  SizedBox(height: 140, child: CategoryTiles()),
+                  SizedBox(height: 130, child: CategoryTiles()),
                   OfferCarousel(),
                   FeaturedProducts(
                     products: Provider.of<ProductsBloc>(context)

@@ -18,10 +18,20 @@ class OrderHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("My Orders")),
-      body: Container(
-        child: Center(
-          child: Text("My Orders", style: context.textTheme.headline6),
-        ),
+      body: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            margin: EdgeInsets.all(8),
+            child: Column(
+              children: [
+                Row(
+                  children: [Text("TITLE"), Text("12/11/2020")],
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
