@@ -21,6 +21,7 @@ export 'products/product_variant.dart';
 export 'products/widgets/product_image_slider.dart';
 export 'products/widgets/add_to_cart_button.dart';
 export 'products/widgets/product_description.dart';
+export 'products/widgets/product_tile.dart';
 
 export 'category/category_tiles.dart';
 export 'category/category_page.dart';
