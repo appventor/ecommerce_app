@@ -124,6 +124,7 @@ class Product {
     this.qty,
     this.skuId,
     this.price,
+    this.tax,
     this.offer,
     this.images,
     this.option,
@@ -141,6 +142,7 @@ class Product {
   int qty;
   String skuId;
   double price;
+  double tax;
   double offer;
   List<String> images;
   List<ProductOption> option;
@@ -158,6 +160,7 @@ class Product {
     int qty,
     String skuId,
     double price,
+    double tax,
     double offer,
     List<String> images,
     List<ProductOption> option,
@@ -175,6 +178,7 @@ class Product {
         qty: qty ?? this.qty,
         skuId: skuId ?? this.skuId,
         price: price ?? this.price,
+        tax: tax ?? this.tax,
         offer: offer ?? this.offer,
         images: images ?? this.images,
         option: option ?? this.option,
@@ -193,6 +197,7 @@ class Product {
         qty: json["qty"] == null ? null : json["qty"],
         skuId: json["skuId"] == null ? null : json["skuId"],
         price: json["price"] == null ? null : json["price"].toDouble(),
+        tax: json["tax"] == null ? null : json["tax"].toDouble(),
         offer: json["offer"] == null ? null : json["offer"].toDouble(),
         images: json["images"] == null
             ? null
@@ -219,6 +224,7 @@ class Product {
         "qty": qty == null ? null : qty,
         "skuId": skuId == null ? null : skuId,
         "price": price == null ? null : price,
+        "tax": tax == null ? null : tax,
         "offer": offer == null ? null : offer,
         "images":
             images == null ? null : List<dynamic>.from(images.map((x) => x)),

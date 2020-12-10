@@ -19,7 +19,7 @@ class CartRouter extends RouterConfig {
 class ShoppingCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Product> items = Provider.of<OrderBloc>(context).orders;
+    List<Product> items = Provider.of<OrderBloc>(context).order.products;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(

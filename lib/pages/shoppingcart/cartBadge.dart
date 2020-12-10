@@ -6,7 +6,7 @@ import '../pages.dart';
 class CartBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int items = Provider.of<OrderBloc>(context).orders.length;
+    int items = Provider.of<OrderBloc>(context).order.products.length;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Badge(

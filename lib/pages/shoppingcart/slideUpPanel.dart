@@ -43,93 +43,25 @@ class SlideUpPanel extends StatelessWidget {
                   ),
                   _pricingDetails(
                       title: "No of Items",
-                      value:
-                          Provider.of<OrderBloc>(context).totalQty.toString()),
+                      value: Provider.of<OrderBloc>(context)
+                          .order
+                          .totalQty
+                          .toString()),
                   _pricingDetails(
                       title: "Sub Total",
                       value:
-                          "₹${Provider.of<OrderBloc>(context).subTotal.toStringAsFixed(2)}"),
-                  _pricingDetails(
-                      title: "Tax",
-                      value:
-                          "${Provider.of<OrderBloc>(context).tax.toString()}%"),
+                          "₹${Provider.of<OrderBloc>(context).order.subTotal.toStringAsFixed(2)}"),
+                  _pricingDetails(title: "Tax", value: "18%"),
                   _pricingDetails(
                       title: "Grand Total",
                       value:
-                          "₹${Provider.of<OrderBloc>(context).grandTotal.toStringAsFixed(2)}"),
+                          "₹${Provider.of<OrderBloc>(context).order.grandTotal.toStringAsFixed(2)}"),
                 ],
               ),
             ),
           );
         },
       ),
-    );
-
-    DraggableScrollableSheet(
-      initialChildSize: 0.2,
-      minChildSize: 0.2,
-      maxChildSize: 0.4,
-      builder: (BuildContext context, ScrollController scrollController) {
-        return Material(
-            color: Colors.transparent,
-            elevation: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                      // height: 280,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      child: ListView(
-                        controller: scrollController,
-                        shrinkWrap: true,
-                        primary: false,
-                        children: [
-                          Text(
-                            "Pricing Details",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                          _pricingDetails(
-                              title: "No of Items",
-                              value: Provider.of<OrderBloc>(context)
-                                  .totalQty
-                                  .toString()),
-                          _pricingDetails(
-                              title: "Sub Total",
-                              value:
-                                  "₹${Provider.of<OrderBloc>(context).subTotal.toStringAsFixed(2)}"),
-                          _pricingDetails(
-                              title: "Tax",
-                              value:
-                                  "${Provider.of<OrderBloc>(context).tax.toString()}%"),
-                          _pricingDetails(
-                              title: "Grand Total",
-                              value:
-                                  "₹${Provider.of<OrderBloc>(context).grandTotal.toStringAsFixed(2)}")
-                        ],
-                      )),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 4),
-                    height: 5,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[400]),
-                  )
-                ],
-              ),
-            ));
-      },
     );
   }
 

@@ -16,22 +16,22 @@ class CheckoutRouter extends RouterConfig {
         ? null
         : MaterialPageRoute(
             settings: settings,
-            builder: (_) => CategoryDetail(
+            builder: (_) => Checkout(
                   id: match.namedGroup('cid'),
-                  category: settings.arguments,
+                  order: settings.arguments,
                 ));
   }
 
-  static Future<T> navigate<T>(BuildContext context, String id, Orders orders) {
-    return Navigator.pushNamed<T>(context, '/checkout/$id', arguments: orders);
+  static Future<T> navigate<T>(BuildContext context, String id, Order order) {
+    return Navigator.pushNamed<T>(context, '/checkout/$id', arguments: order);
   }
 }
 
 class Checkout extends StatelessWidget {
   final String id;
-  final Orders orders;
+  final Order order;
 
-  const Checkout({Key key, this.id, this.orders}) : super(key: key);
+  const Checkout({Key key, this.id, this.order}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

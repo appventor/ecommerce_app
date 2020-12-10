@@ -13,26 +13,10 @@ class AddToCartButton extends StatefulWidget {
 
 class _AddToCartButtonState extends State<AddToCartButton> {
   int value = 0;
-  @override
-  void initState() {
-    super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   Provider.of<OrderBloc>(context, listen: false).orders.firstWhere((item) {
-    //     if (item.id.compareTo(widget.product.id) == 0) {
-    //       print("value item exists, qty: ${item.qty}");
-    //       setState(() {
-    //         value = item.qty;
-    //       });
-    //       return true;
-    //     } else
-    //       return false;
-    //   }, orElse: () => null);
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<OrderBloc>(context).orders.firstWhere((item) {
+    Provider.of<OrderBloc>(context).order.products.firstWhere((item) {
       if (item.id.compareTo(widget.product.id) == 0) {
         setState(() {
           value = item.qty;

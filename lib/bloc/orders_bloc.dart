@@ -4,39 +4,33 @@ import 'package:flutter/material.dart';
 
 class OrderBloc extends ChangeNotifier {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  List<Product> orders = [];
-  double subTotal;
-  int totalQty;
-  double tax = 18;
-  double grandTotal;
+  Order order = Order(products: []);
 
   calculatePrice() {
-    subTotal = 0;
-    totalQty = 0;
-    orders.map((item) {
-      print("${item.title}");
-      subTotal += item.price * item.qty;
-      totalQty += item.qty;
-      print("$subTotal");
+    order.subTotal = 0;
+    order.totalQty = 0;
+    order.products.map((item) {
+      order.subTotal += item.price * item.qty;
+      order.totalQty += item.qty;
     }).toList();
-    double taxAmount = (subTotal * (tax / 100));
-    grandTotal = subTotal + taxAmount;
+    order.taxAmt = (order.subTotal * (18 / 100));
+    order.grandTotal = order.subTotal + order.taxAmt;
   }
 
   addItem({Product item}) {
-    orders.firstWhere(
+    order.products.firstWhere(
       (orderItem) {
         if (orderItem.id.compareTo(item.id) == 0) {
-          orders.replaceRange(
-              orders.indexOf(orderItem),
-              orders.indexOf(orderItem) + 1,
+          order.products.replaceRange(
+              order.products.indexOf(orderItem),
+              order.products.indexOf(orderItem) + 1,
               [orderItem.copyWith(qty: orderItem.qty + 1)]);
           return true;
         } else
           return false;
       },
       orElse: () {
-        orders.add(item.copyWith(qty: 1));
+        order.products.add(item.copyWith(qty: 1));
         return item;
       },
     );
@@ -45,16 +39,16 @@ class OrderBloc extends ChangeNotifier {
   }
 
   removeItem({Product item}) {
-    orders.firstWhere(
+    order.products.firstWhere(
       (orderItem) {
         if (orderItem.id.compareTo(item.id) == 0) {
           if (orderItem.qty > 1) {
-            orders.replaceRange(
-                orders.indexOf(orderItem),
-                orders.indexOf(orderItem) + 1,
+            order.products.replaceRange(
+                order.products.indexOf(orderItem),
+                order.products.indexOf(orderItem) + 1,
                 [orderItem.copyWith(qty: orderItem.qty - 1)]);
           } else
-            orders.remove(orderItem);
+            order.products.remove(orderItem);
           return true;
         } else
           return false;
