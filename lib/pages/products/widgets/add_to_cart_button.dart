@@ -1,13 +1,35 @@
+import 'package:ecommerce/bloc/orders_bloc.dart';
+import 'package:ecommerce/model/models.dart';
 import 'package:flutter/material.dart';
 import '../../pages.dart';
 
 class AddToCartButton extends StatefulWidget {
+  final Product product;
+
+  const AddToCartButton({Key key, @required this.product}) : super(key: key);
   @override
   _AddToCartButtonState createState() => _AddToCartButtonState();
 }
 
 class _AddToCartButtonState extends State<AddToCartButton> {
   int value = 0;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<OrderBloc>(context, listen: false).orders.firstWhere((item) {
+        if (item.id.compareTo(widget.product.id) == 0) {
+          print("value item exists, qty: ${item.qty}");
+          setState(() {
+            value = item.qty;
+          });
+          return true;
+        } else
+          return false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +50,8 @@ class _AddToCartButtonState extends State<AddToCartButton> {
                     onPressed: () {
                       setState(() {
                         if (value > 0) value--;
+                        Provider.of<OrderBloc>(context, listen: false)
+                            .removeItem(item: widget.product);
                       });
                     },
                   ),
@@ -49,6 +73,8 @@ class _AddToCartButtonState extends State<AddToCartButton> {
               onPressed: () {
                 setState(() {
                   value++;
+                  Provider.of<OrderBloc>(context, listen: false)
+                      .addItem(item: widget.product);
                 });
               },
             ),

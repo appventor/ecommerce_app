@@ -1,15 +1,18 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce/bloc/orders_bloc.dart';
 import 'package:flutter/material.dart';
 import '../pages.dart';
 
 class CartBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int items = Provider.of<OrderBloc>(context).orders.length;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Badge(
+        showBadge: items < 1 ? false : true,
         badgeContent: Text(
-          "2",
+          items.toString(),
           style: context.accentTextTheme.bodyText1,
         ),
         alignment: Alignment.center,

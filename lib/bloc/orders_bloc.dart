@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 
 class OrderBloc extends ChangeNotifier {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  List<Order> orders;
+  List<Order> orders = List<Order>();
 
   addItem({Product item}) {
     orders.firstWhere(
       (orderItem) {
         if (orderItem.id.compareTo(item.id) == 0) {
           print("Item exists, adding Qty");
-          orderItem.copyWith(qty: orderItem.qty + 1);
+          orders.remove(orderItem);
+          orders.add(orderItem.copyWith(qty: orderItem.qty + 1));
+          // print(orderItem.qty);
           return true;
         } else
-          return true;
+          return false;
       },
       orElse: () {
         print("orElse adding the element");
@@ -30,25 +32,28 @@ class OrderBloc extends ChangeNotifier {
         return order;
       },
     );
+    notifyListeners();
+  }
 
-    // if (orders.isEmpty) {
-    //   orders.add(Order(
-    //     id: item.id,
-    //     title: item.title,
-    //     imageUrl: item.images.first,
-    //     price: item.price,
-    //     qty: 1,
-    //     skuId: item.skuId,
-    //   ));
-    // } else {
-    //   orders.firstWhere((orderItem) {
-    //     if (orderItem.id.compareTo(item.id) == 0) {
-    //       orderItem.copyWith(qty: orderItem.qty + 1);
-    //       return true;
-    //     } else
-    //       return true;
-    //   });
-    // }
+  removeItem({Product item}) {
+    orders.firstWhere(
+      (orderItem) {
+        if (orderItem.id.compareTo(item.id) == 0) {
+          if (orderItem.qty > 1) {
+            print("Item exists, removing Qty");
+            orderItem.copyWith(qty: orderItem.qty - 1);
+          } else
+            orders.remove(orderItem);
+          return true;
+        } else
+          return false;
+      },
+      orElse: () {
+        print("orElse removing the element");
+        return null;
+      },
+    );
+    notifyListeners();
   }
 
   getCurrentOrders() async {}

@@ -101,7 +101,9 @@ class _ProductDetailState extends State<ProductDetail> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Stock:"),
-                          AddToCartButton(),
+                          AddToCartButton(
+                            product: widget.product,
+                          ),
                         ],
                       ),
                       ProductDescription()
