@@ -19,7 +19,9 @@ class CartBadge extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(100),
           child: Icon(Icons.shopping_cart_rounded),
-          onTap: () => Navigator.of(context).pushNamed("/cart"),
+          onTap: () {
+            Navigator.of(context).pushNamed("/cart");
+          },
         ),
       ),
     );

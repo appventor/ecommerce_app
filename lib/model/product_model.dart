@@ -121,6 +121,7 @@ class Product {
     this.category,
     this.categoryId,
     this.stock,
+    this.qty,
     this.skuId,
     this.price,
     this.offer,
@@ -137,6 +138,7 @@ class Product {
   String category;
   String categoryId;
   int stock;
+  int qty;
   String skuId;
   double price;
   double offer;
@@ -153,6 +155,7 @@ class Product {
     String category,
     String categoryId,
     int stock,
+    int qty,
     String skuId,
     double price,
     double offer,
@@ -169,6 +172,7 @@ class Product {
         category: category ?? this.category,
         categoryId: categoryId ?? this.categoryId,
         stock: stock ?? this.stock,
+        qty: qty ?? this.qty,
         skuId: skuId ?? this.skuId,
         price: price ?? this.price,
         offer: offer ?? this.offer,
@@ -186,6 +190,7 @@ class Product {
         category: json["category"] == null ? null : json["category"],
         categoryId: json["categoryId"] == null ? null : json["categoryId"],
         stock: json["stock"] == null ? null : json["stock"],
+        qty: json["qty"] == null ? null : json["qty"],
         skuId: json["skuId"] == null ? null : json["skuId"],
         price: json["price"] == null ? null : json["price"].toDouble(),
         offer: json["offer"] == null ? null : json["offer"].toDouble(),
@@ -211,6 +216,7 @@ class Product {
         "category": category == null ? null : category,
         "categoryId": categoryId == null ? null : categoryId,
         "stock": stock == null ? null : stock,
+        "qty": qty == null ? null : qty,
         "skuId": skuId == null ? null : skuId,
         "price": price == null ? null : price,
         "offer": offer == null ? null : offer,

@@ -16,22 +16,34 @@ class _AddToCartButtonState extends State<AddToCartButton> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<OrderBloc>(context, listen: false).orders.firstWhere((item) {
-        if (item.id.compareTo(widget.product.id) == 0) {
-          print("value item exists, qty: ${item.qty}");
-          setState(() {
-            value = item.qty;
-          });
-          return true;
-        } else
-          return false;
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Provider.of<OrderBloc>(context, listen: false).orders.firstWhere((item) {
+    //     if (item.id.compareTo(widget.product.id) == 0) {
+    //       print("value item exists, qty: ${item.qty}");
+    //       setState(() {
+    //         value = item.qty;
+    //       });
+    //       return true;
+    //     } else
+    //       return false;
+    //   }, orElse: () => null);
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<OrderBloc>(context).orders.firstWhere((item) {
+      if (item.id.compareTo(widget.product.id) == 0) {
+        setState(() {
+          value = item.qty;
+        });
+        return true;
+      } else
+        return false;
+    }, orElse: () {
+      value = 0;
+      return null;
+    });
     return Container(
       width: 100,
       height: 40,

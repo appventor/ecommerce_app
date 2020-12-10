@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Duration(microseconds: 1000),
+      duration: Duration(milliseconds: 1000),
       switchInCurve: Curves.easeIn,
       child: _loaded
           ? LandingPage()

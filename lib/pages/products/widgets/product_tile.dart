@@ -72,6 +72,10 @@ class ProductTile extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24, top: 32),
+              child: AddToCartButton(product: product),
+            )
           ],
         ),
       ),

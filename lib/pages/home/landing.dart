@@ -6,6 +6,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBody: true,
         drawer: AppDrawer(),
         body: NestedScrollView(
             headerSliverBuilder: (context, isInnerBoxScrolled) =>

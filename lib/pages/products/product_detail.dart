@@ -77,19 +77,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           Text(
                             product.title,
                             style: context.textTheme.headline5,
-                          ),
-                          // Container(
-                          //   height: 30,
-                          //   width: 30,
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.red.withOpacity(0.5),
-                          //       borderRadius: BorderRadius.circular(5)),
-                          //   child: Center(
-                          //       child: Text(
-                          //     "4.2",
-                          //     style: context.textTheme.bodyText1,
-                          //   )),
-                          // )
+                          )
                         ],
                       ),
                       ProductImageSlider(

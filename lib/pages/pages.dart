@@ -34,6 +34,7 @@ export 'checkout/checkout.dart';
 
 export 'shoppingcart/shopping_cart.dart';
 export 'shoppingcart/cartBadge.dart';
+export 'shoppingcart/slideUpPanel.dart';
 
 export 'search/searchbar.dart';
 export 'search/searchpage.dart';
