@@ -6,6 +6,13 @@ class OrderBloc extends ChangeNotifier {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Order order = Order(products: []);
 
+  updateCartFirestore() {
+    firestore
+        .collection("users")
+        .doc("PSU5Ql8Sr61W9riOwkrC")
+        .update({"cart": order.toMap()});
+  }
+
   calculatePrice() {
     order.subTotal = 0;
     order.totalQty = 0;
@@ -18,6 +25,8 @@ class OrderBloc extends ChangeNotifier {
   }
 
   addItem({Product item}) {
+    if (order.id == null) order.id = firestore.collection("orders").doc().id;
+
     order.products.firstWhere(
       (orderItem) {
         if (orderItem.id.compareTo(item.id) == 0) {
@@ -35,6 +44,7 @@ class OrderBloc extends ChangeNotifier {
       },
     );
     calculatePrice();
+    updateCartFirestore();
     notifyListeners();
   }
 
@@ -58,8 +68,13 @@ class OrderBloc extends ChangeNotifier {
       },
     );
     calculatePrice();
+    updateCartFirestore();
     notifyListeners();
   }
 
-  getCurrentOrders() async {}
+  getCurrentOrders() async {
+    DocumentSnapshot snapshot =
+        await firestore.collection("users").doc("PSU5Ql8Sr61W9riOwkrC").get();
+    order = Order.fromMap(snapshot.data()["cart"]);
+  }
 }

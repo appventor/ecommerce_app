@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce/bloc/orders_bloc.dart';
 import 'package:ecommerce/bloc/products_bloc.dart';
 
 import '../../services/locator.dart';
@@ -36,6 +37,11 @@ class SplashState extends State<Splash> {
 
   void handleStartupLogic() {
     String user = _dataStorage.getUserData();
+    if (!user.contains("nil login")) {
+      Provider.of<ProductsBloc>(context, listen: false).fetchLandingPageData();
+      Provider.of<OrderBloc>(context, listen: false).getCurrentOrders();
+    }
+
     Timer((const Duration(milliseconds: 900)), () {
       switch (user) {
         case 'nil':
@@ -45,8 +51,6 @@ class SplashState extends State<Splash> {
           LoginRouter.navigate(context);
           break;
         default:
-          Provider.of<ProductsBloc>(context, listen: false)
-              .fetchLandingPageData();
           widget.loaded(true);
       }
     });

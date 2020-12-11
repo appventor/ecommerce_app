@@ -15,7 +15,7 @@ class Order {
     this.id,
     this.invoiceId,
     this.status,
-    this.transactionId,
+    this.txnId,
     this.orderedOn,
     this.deliveryOn,
     this.shippingAddress,
@@ -32,7 +32,7 @@ class Order {
   String id;
   String invoiceId;
   int status;
-  String transactionId;
+  String txnId;
   DateTime orderedOn;
   DateTime deliveryOn;
   String shippingAddress;
@@ -49,7 +49,7 @@ class Order {
     String id,
     String invoiceId,
     int status,
-    String transactionId,
+    String txnId,
     DateTime orderedOn,
     DateTime deliveryOn,
     String shippingAddress,
@@ -66,7 +66,7 @@ class Order {
         id: id ?? this.id,
         invoiceId: invoiceId ?? this.invoiceId,
         status: status ?? this.status,
-        transactionId: transactionId ?? this.transactionId,
+        txnId: txnId ?? this.txnId,
         orderedOn: orderedOn ?? this.orderedOn,
         deliveryOn: deliveryOn ?? this.deliveryOn,
         shippingAddress: shippingAddress ?? this.shippingAddress,
@@ -84,8 +84,7 @@ class Order {
         id: json["id"] == null ? null : json["id"],
         invoiceId: json["invoiceID"] == null ? null : json["invoiceID"],
         status: json["status"] == null ? null : json["status"],
-        transactionId:
-            json["transactionID"] == null ? null : json["transactionID"],
+        txnId: json["txnId"] == null ? null : json["txnId"],
         orderedOn: json["orderedOn"] == null
             ? null
             : DateTime.parse(json["orderedOn"]),
@@ -113,7 +112,7 @@ class Order {
         "id": id == null ? null : id,
         "invoiceID": invoiceId == null ? null : invoiceId,
         "status": status == null ? null : status,
-        "transactionID": transactionId == null ? null : transactionId,
+        "txnId": txnId == null ? null : txnId,
         "orderedOn": orderedOn == null ? null : orderedOn.toIso8601String(),
         "deliveryOn": deliveryOn == null ? null : deliveryOn.toIso8601String(),
         "shippingAddress": shippingAddress == null ? null : shippingAddress,

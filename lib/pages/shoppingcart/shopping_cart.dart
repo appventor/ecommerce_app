@@ -58,17 +58,24 @@ class ShoppingCart extends StatelessWidget {
           items.length > 0 ? SlideUpPanel() : SizedBox(),
           items.length > 0
               ? Container(
-                  margin: EdgeInsets.all(16),
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    "CHECKOUT",
-                    style: context.accentTextTheme.headline6,
-                  )),
+                  padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                  color: Colors.white,
+                  height: 60,
+                  child: RaisedButton(
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "CHECKOUT",
+                          style: context.accentTextTheme.headline6,
+                        ),
+                      ],
+                    ),
+                    onPressed: () {},
+                  ),
                 )
               : SizedBox()
         ],
