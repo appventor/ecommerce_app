@@ -118,16 +118,21 @@ class _CategoryDetailState extends State<CategoryDetail>
         ),
       ),
       body: widget.category != null
-          ? CatalogBrowser(productRef: widget.category.products)
+          ? CatalogBrowser(
+              productRef: widget.category.products,
+              isList: !_isList,
+            )
           : SizedBox(),
     );
   }
 }
 
 class CatalogBrowser extends StatefulWidget {
+  final bool isList;
   final DocumentReference productRef;
 
-  const CatalogBrowser({Key key, this.productRef}) : super(key: key);
+  const CatalogBrowser({Key key, this.productRef, this.isList})
+      : super(key: key);
   @override
   _CatalogBrowserState createState() => _CatalogBrowserState();
 }
@@ -148,7 +153,9 @@ class _CatalogBrowserState extends State<CatalogBrowser> {
 
   @override
   Widget build(BuildContext context) {
-    return ProductList(products: products);
+    return widget.isList
+        ? ProductList(products: products)
+        : ProductGrid(products: products);
   }
 }
 

@@ -24,16 +24,22 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
   void initState() {
     items = List.generate(
         widget.images.length,
-        (index) => Container(
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              height: 300,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(widget.images[index])),
-                  color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                      .withOpacity(1.0),
-                  borderRadius: BorderRadius.circular(10)),
+        (index) => GestureDetector(
+              onTap: () => showImageViewer(
+                  images: widget.images,
+                  index: index,
+                  pageController: PageController(initialPage: index)),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                height: 300,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(widget.images[index])),
+                    color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                        .withOpacity(1.0),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
             ));
     super.initState();
   }
@@ -45,20 +51,17 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
         child: Hero(
             tag: "${widget.id}",
             child: Stack(children: [
-              GestureDetector(
-                onTap: () => showImageViewer(images: widget.images),
-                child: CarouselSlider(
-                  items: items,
-                  options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height / 3,
-                      autoPlay: true,
-                      viewportFraction: 1.0,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      }),
-                ),
+              CarouselSlider(
+                items: items,
+                options: CarouselOptions(
+                    height: MediaQuery.of(context).size.height / 3,
+                    autoPlay: true,
+                    viewportFraction: 1.0,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    }),
               ),
               Positioned(
                   bottom: 2,
@@ -84,7 +87,8 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
   }
 }
 
-showImageViewer({List<String> images}) {
+showImageViewer(
+    {List<String> images, int index, PageController pageController}) {
   showDialog(
     context: navigatorKey.currentContext,
     barrierDismissible: true,
@@ -93,13 +97,15 @@ showImageViewer({List<String> images}) {
       child: Stack(
         children: [
           PhotoViewGallery.builder(
+            pageController: pageController,
             scrollPhysics: const BouncingScrollPhysics(),
             builder: (BuildContext context, int index) {
               return PhotoViewGalleryPageOptions(
                 imageProvider: NetworkImage(images[index]),
                 initialScale: PhotoViewComputedScale.contained * 1,
-                heroAttributes:
-                    PhotoViewHeroAttributes(tag: images[index].toString()),
+                heroAttributes: PhotoViewHeroAttributes(
+                    tag: images[index].toString(),
+                    transitionOnUserGestures: true),
               );
             },
             itemCount: images.length,
