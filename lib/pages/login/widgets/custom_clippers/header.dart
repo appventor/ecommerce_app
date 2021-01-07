@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'fadeslidetransition.dart';
+import '../../../pages.dart';
 
 class Header extends StatelessWidget {
   final Animation<double> animation;
@@ -12,34 +13,37 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          FlutterLogo(
-            size: 48.0,
+          FadeSlideTransition(
+            animation: animation,
+            additionalOffset: 0.0,
+            child: Hero(
+              tag: "logo",
+              child: FlutterLogo(
+                size: 150,
+              ),
+            ),
           ),
-          const SizedBox(height: 16),
           FadeSlideTransition(
             animation: animation,
             additionalOffset: 0.0,
             child: Text(
-              'Welcome to Estore',
+              'Welcome!',
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .headline4
                   .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 8),
           FadeSlideTransition(
             animation: animation,
             additionalOffset: 16.0,
             child: Text(
-              'We are',
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
+              'Enter your mobile number to continue',
+              style: context.textTheme.subtitle1
                   .copyWith(color: Colors.black.withOpacity(0.5)),
             ),
           ),

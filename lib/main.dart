@@ -23,7 +23,7 @@ class RootApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(),
+        initialRoute: "/",
         navigatorKey: navigatorKey,
         onGenerateRoute: RouterConfig.onGenerateRoute,
       ),

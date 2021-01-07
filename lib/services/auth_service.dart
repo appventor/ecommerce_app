@@ -2,47 +2,62 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+enum AuthStatus { signedIn, signedOut, failed, codeSent, timedOut }
+
 class AuthenticationService {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  String _token;
-  String get token => _token;
+  AuthStatus authStatus = AuthStatus.signedOut;
 
-  Future registerUser(String mobile) async {
+  String _verificationId;
+
+  Future<AuthStatus> registerUser(String mobile) async {
     auth.verifyPhoneNumber(
         phoneNumber: mobile,
-        timeout: Duration(minutes: 1),
-        verificationCompleted: (authCredential) {
-          print(authCredential.providerId);
+        // timeout: Duration(minutes: 1),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          print(credential.smsCode);
+          await auth.signInWithCredential(credential);
+          return AuthStatus.signedIn;
         },
         verificationFailed: (authException) {
           print(" ${authException.code}: ${authException.message}");
+          return AuthStatus.failed;
         },
         codeSent: (String verificationId, [int forceResendingToken]) {
           print("code sent :$verificationId");
+          _verificationId = verificationId;
+          return AuthStatus.codeSent;
         },
-        codeAutoRetrievalTimeout: null);
+        timeout: Duration(seconds: 120),
+        codeAutoRetrievalTimeout: (String verificationId) {
+          print("code autoretreival :$verificationId");
+          return AuthStatus.timedOut;
+        });
+  }
+
+  Future<AuthStatus> verifyCode({String code}) {
+    var creds = PhoneAuthProvider.credential(
+        verificationId: _verificationId, smsCode: code);
+    return auth.signInWithCredential(creds).then((userCreds) {
+      if (userCreds.user != null)
+        return AuthStatus.signedIn;
+      else
+        return AuthStatus.failed;
+    }).catchError((onError) => AuthStatus.failed);
   }
 
   Future logout() async {
-    await auth.signOut();
+    await auth.signOut().then((_) => authStatus = AuthStatus.signedOut);
   }
 
-  Future guestLogin() async {
-    return await auth.signInAnonymously();
+  guestLogin() {
+    auth
+        .signInAnonymously()
+        .then((credential) => authStatus = AuthStatus.signedIn);
   }
 
-  Future<bool> isUserLoggedIn() async {
-    var user = auth.authStateChanges();
-    // StreamSubscription<User> userStateChanges = user.listen((event) {});
-    await _populateCurrentUser(await user.first);
-    return user != null;
-  }
-
-  Future _populateCurrentUser(User user) async {
-    if (user != null) {
-      // await _analyticsService.setUserProperties(userId: user.uid);
-      _token = await user.getIdToken();
-    }
+  Future<String> isUserLoggedIn() async {
+    return auth.currentUser.uid;
   }
 }

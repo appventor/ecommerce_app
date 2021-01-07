@@ -26,6 +26,8 @@ class SplashState extends State<Splash> {
   }
   FlutterLogoStyle _logoStyle = FlutterLogoStyle.markOnly;
   DataStorage _dataStorage = locator<DataStorage>();
+  // AuthenticationService _authenticationService =
+  //     locator<AuthenticationService>();
 
   @override
   void initState() {
@@ -60,9 +62,12 @@ class SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: FlutterLogo(
-        size: 300.0,
-        style: _logoStyle,
+          child: Hero(
+        tag: "logo",
+        child: FlutterLogo(
+          size: 300.0,
+          style: _logoStyle,
+        ),
       )),
     );
   }

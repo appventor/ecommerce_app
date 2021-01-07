@@ -14,10 +14,12 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DataStorage _dataStorage = locator<DataStorage>();
+    AuthenticationService _authService = locator<AuthenticationService>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           FadeSlideTransition(
             animation: animation,
@@ -28,7 +30,6 @@ class LoginForm extends StatelessWidget {
               obscureText: false,
             ),
           ),
-          SizedBox(height: 32),
           FadeSlideTransition(
             animation: animation,
             additionalOffset: 32,
@@ -38,56 +39,19 @@ class LoginForm extends StatelessWidget {
               obscureText: true,
             ),
           ),
-          SizedBox(height: 32),
           FadeSlideTransition(
-            animation: animation,
-            additionalOffset: 2 * 32.0,
-            child: RaisedButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              child: Text('Login to continue'),
-              onPressed: () {
-                _dataStorage.storeUserData('PSU5Ql8Sr61W9riOwkrC');
-                HomeRouter.navigate(context);
-              },
-            ),
-          ),
-          SizedBox(height: 2 * 32.0),
-          FadeSlideTransition(
-            animation: animation,
-            additionalOffset: 3 * 32.0,
-            child: RaisedButton(
-              color: Colors.white,
-              textColor: Colors.black.withOpacity(0.5),
-              child: Row(
-                children: [
-                  Text('Continue with Google'),
-                  Image(
-                    image: AssetImage("assets/images/google_logo.png"),
-                    height: 48.0,
-                  ),
-                ],
-              ),
-              onPressed: () {
-                _dataStorage.storeUserData('username');
-                Navigator.of(context).pushReplacementNamed("/");
-              },
-            ),
-          ),
-          SizedBox(height: 32),
-          FadeSlideTransition(
-            animation: animation,
-            additionalOffset: 4 * 32.0,
-            child: RaisedButton(
-              color: Colors.black,
-              textColor: Colors.white,
-              child: Text('Create a Bubble Account'),
-              onPressed: () {
-                _dataStorage.storeUserData('username');
-                HomeRouter.navigate(context);
-              },
-            ),
-          ),
+              animation: animation,
+              additionalOffset: 2 * 32.0,
+              child: RaisedButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                child: Text('Login to continue'),
+                onPressed: () {
+                  _authService.registerUser("+918073748630");
+                  // _dataStorage.storeUserData('PSU5Ql8Sr61W9riOwkrC');
+                  // HomeRouter.navigate(context);
+                },
+              ))
         ],
       ),
     );
