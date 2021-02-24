@@ -29,7 +29,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   Animation<double> _pincodeAnimation;
 
   bool _loading = false;
-  bool _showPIN = false;
+  bool _showPIN = true;
 
   @override
   void initState() {

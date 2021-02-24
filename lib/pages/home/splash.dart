@@ -26,8 +26,8 @@ class SplashState extends State<Splash> {
   }
   FlutterLogoStyle _logoStyle = FlutterLogoStyle.markOnly;
   DataStorage _dataStorage = locator<DataStorage>();
-  // AuthenticationService _authenticationService =
-  //     locator<AuthenticationService>();
+  AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class SplashState extends State<Splash> {
     super.initState();
   }
 
-  void handleStartupLogic() {
+  void handleStartupLogic() async {
     String user = _dataStorage.getUserData();
     if (!user.contains("nil login")) {
       Provider.of<ProductsBloc>(context, listen: false).fetchLandingPageData();

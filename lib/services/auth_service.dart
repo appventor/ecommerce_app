@@ -12,6 +12,7 @@ class AuthenticationService {
   String _verificationId;
 
   Future<AuthStatus> registerUser(String mobile) async {
+    print(mobile);
     auth.verifyPhoneNumber(
         phoneNumber: mobile,
         // timeout: Duration(minutes: 1),
@@ -57,7 +58,7 @@ class AuthenticationService {
         .then((credential) => authStatus = AuthStatus.signedIn);
   }
 
-  Future<String> isUserLoggedIn() async {
-    return auth.currentUser.uid;
+  Future<User> isUserLoggedIn() async {
+    return auth.currentUser;
   }
 }
